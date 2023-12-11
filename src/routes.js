@@ -8,6 +8,11 @@ export const routes = [
     path: '/',
     component: Login,
     exact: true
+  },
+  {
+    path: '/login',
+    component: Login,
+    exact: true
   }, 
   {
     path: '/dashboard',
