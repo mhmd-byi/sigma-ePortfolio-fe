@@ -3,14 +3,16 @@ import Styles from './register.module.scss';
 import {Button, Heading, Image, Input, Label, Text} from '../../components';
 import { useNavigate } from "react-router-dom";
 import { useRegister } from "./useRegister";
+import { Loader } from "../../components/shared/loader/loader";
 
 const Register = () => { 
     const navigate = useNavigate()
     const navigateTo = () => navigate('/login');
-    const { formData, handleChange, handleSubmit } = useRegister();
+    const { formData, handleChange, handleSubmit, loader } = useRegister();
 
     return (
         <div className={Styles.login}>
+            {loader === true && <Loader />}
             <div className={Styles.content}>
                 <div className={Styles.form}>
                     <div className="d-sm-none mb-4 text-center">
