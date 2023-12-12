@@ -34,6 +34,7 @@ export const useRegister = () => {
             setLoaderState(false);
             sessionStorage.setItem('token', res.data.tokens.access.token);
             sessionStorage.setItem('tokenExpireDate', res.data.tokens.access.expires);
+            sessionStorage.setItem('userId', res.data.user.id);
             navigate('/dashboard');
         })
     };

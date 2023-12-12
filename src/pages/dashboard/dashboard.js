@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Styles from "./dashboard.module.scss";
 import {
   Button,
@@ -10,26 +10,18 @@ import {
   Text,
 } from "../../components";
 import { useNavigate } from "react-router-dom";
-import { Loader } from "../../components/shared/loader/loader";
 import { ProtectedRoute } from "../../components/security/protectedRoute";
+import { useDashboard } from "./useDashboard";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const ToResume = () => navigate("/resume");
   const ToPortfolio = () => navigate("/portfolio");
-  const token = sessionStorage.getItem("token");
-
-  useEffect(() => {
-    console.log("this is token", token);
-    if (token?.length < 2 || token === null) {
-      <Loader />;
-    }
-  }, [token]);
+  const { userDetails } = useDashboard();
 
   return (
     <ProtectedRoute>
       <div className={Styles.dashboard}>
-        {token === null && <Loader />}
         <Sidebar />
         <div className={Styles.main}>
           <Header pageHeading={"Dashboard"} />
@@ -45,10 +37,10 @@ const Dashboard = () => {
             <Card className={Styles.detailCard}>
               <div className={Styles.row}>
                 <div className={Styles.leftCol}>
-                  <Text strong={"medium"}>Username</Text>
-                  <Text color={"secondary"}>username@gmail.com</Text>
-                  <Text color={"secondary"}>+917895641230</Text>
-                  <Text color={"secondary"}>username.sigma.com</Text>
+                  <Text strong={"medium"}>User Details</Text>
+                  <Text color={"secondary"}>{userDetails.username}</Text>
+                  <Text color={"secondary"}>{userDetails.number}</Text>
+                  <Text color={"secondary"}>{userDetails.email}</Text>
                 </div>
                 <div className={Styles.rightCol}>
                   <Image src="./images/avatar.png" />

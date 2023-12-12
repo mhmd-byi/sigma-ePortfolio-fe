@@ -13,13 +13,11 @@ export const ProtectedRoute = ({ children }) => {
     }
 
     useEffect(() => {
-        // Redirect to login if no token or token is invalid
         if (!token || (tokenExpireDate && !isTokenValid(tokenExpireDate))) {
             navigate('/login');
         }
     }, [token, tokenExpireDate, navigate]);
 
-    // Prevent rendering children if there is no token or if token is invalid
     if (!token || (tokenExpireDate && !isTokenValid(tokenExpireDate))) {
         return null;
     }
