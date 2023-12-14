@@ -14,6 +14,10 @@ export const useHeader = () => {
                 refreshToken: sessionStorage.getItem('refreshToken'),
             }
         }).then(() => {
+            sessionStorage.removeItem('token');
+            sessionStorage.removeItem('refreshToken');
+            sessionStorage.removeItem('tokenExpireDate');
+            sessionStorage.removeItem('userId');
             navigate('/login');
         }).catch((err) => {
             alert('Some error occurred, please close the application and try again')
