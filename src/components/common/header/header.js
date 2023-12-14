@@ -2,9 +2,11 @@ import React from 'react';
 import Styles from './header.module.scss';
 import { Icon, Image } from '../../shared';
 import { useNavigate } from "react-router-dom";
+import { useHeader } from './useHeader';
 
 const Header = ({pageHeading}) => { 
     const navigate = useNavigate()
+    const { logout } = useHeader();
 
     return (
         <div className={Styles.header}>
@@ -27,7 +29,7 @@ const Header = ({pageHeading}) => {
                         <li onClick={()=>navigate('/subscribe')}>Subscription</li>
                         <li>Support</li>
                         <li>Rate Us</li>
-                        <li>Logout</li>
+                        <li onClick={() => logout()}>Logout</li>
                     </ul>
                 </div>                
             </div>

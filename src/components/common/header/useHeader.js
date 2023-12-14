@@ -1,0 +1,27 @@
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+export const useHeader = () => {
+    const navigate = useNavigate();
+    const logout = () => {
+        axios({
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            url: `${process.env.REACT_APP_API_URL}auth/logout`,
+            params: {
+                refreshToken: sessionStorage.getItem('refreshToken'),
+            }
+        }).then(() => {
+            navigate('/login');
+        }).catch((err) => {
+            console.log('error', err);
+            alert('kuch error he bhai check in console')
+        })
+    };
+
+    return {
+        logout,
+    }
+};

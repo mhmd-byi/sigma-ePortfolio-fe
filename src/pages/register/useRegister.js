@@ -33,6 +33,7 @@ export const useRegister = () => {
             console.log('this is res', res)
             setLoaderState(false);
             sessionStorage.setItem('token', res.data.tokens.access.token);
+            sessionStorage.setItem('refreshToken', res.data.tokens.refresh.token);
             sessionStorage.setItem('tokenExpireDate', res.data.tokens.access.expires);
             sessionStorage.setItem('userId', res.data.user.id);
             navigate('/dashboard');
