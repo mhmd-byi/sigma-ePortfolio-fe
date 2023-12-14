@@ -2,33 +2,26 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const useRegister = () => {
+export const useLogin = () => {
     const navigate = useNavigate();
     const [loaderState, setLoaderState] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
-        username: '',
-        email: '',
-        mobile: '',
         password: '',
-        confirmPassword: '',
     });
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         setLoaderState(true);
-        axios.post(`${process.env.REACT_APP_API_URL}auth/register`, {
-            data: {
-                name: formData.name,
+        axios({
+            method: 'POST',
+            params: {
                 email: formData.email,
-                username: formData.username,
-                phone: formData.mobile,
                 password: formData.password,
-            }
+            },
+            url: `${process.env.REACT_APP_API_URL}auth/login`,
         }).then((res) => {
             setLoaderState(false);
             sessionStorage.setItem('token', res.data.tokens.access.token);
@@ -36,13 +29,17 @@ export const useRegister = () => {
             sessionStorage.setItem('tokenExpireDate', res.data.tokens.access.expires);
             sessionStorage.setItem('userId', res.data.user.id);
             navigate('/dashboard');
+        }).catch(() => {
+            setLoaderState(false);
+            alert('Invalid email or password');
+            window.location.reload();
         })
-    };
+    }
 
     return {
-        formData,
-        handleChange,
         handleSubmit,
+        handleChange,
+        formData,
         loaderState,
     }
 };

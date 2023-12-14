@@ -2,14 +2,17 @@ import React from "react";
 import Styles from './login.module.scss';
 import {Button, Heading, Image, Input, Label, Text} from '../../components';
 import { useNavigate } from "react-router-dom";
+import { useLogin } from "./useLogin";
+import { Loader } from "../../components/shared/loader/loader";
 
 const Login = () => { 
     const navigate = useNavigate()
     const navigateTo = () => navigate('/register');
-    const ToDashboard = () => navigate('/dashboard');
+    const { handleChange, handleSubmit, formData, loaderState } = useLogin();
   
     return (
         <div className={Styles.login}>
+            {loaderState && <Loader />}
             <div className={Styles.content}>
                 <div className={Styles.form}>
                     <div className="d-sm-none mb-4 text-center">
@@ -26,11 +29,11 @@ const Login = () => {
                     </div>
                     <div className="mb-3">
                         <Label>Email*</Label>
-                        <Input type={'email'} placeholder={'mail@simmmple.com'} />
+                        <Input type={'email'} inputName='email' placeholder={'mail@simmmple.com'} value={formData.email} onChange={handleChange} />
                     </div>
                     <div className="mb-3">
                         <Label>Password*</Label>
-                        <Input type={'password'} placeholder={'********'} />
+                        <Input type={'password'} inputName='password' placeholder={'********'} value={formData.password} onChange={handleChange} />
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
                         <div class="form-check">
@@ -41,7 +44,7 @@ const Login = () => {
                         </div>
                         <Text variant={'md'} strong={'semiBold'} className={Styles.cursor}>Forgot Password?</Text>
                     </div>
-                    <Button className={Styles.loginBtn} onClick={ToDashboard}>Sign in</Button>
+                    <Button className={Styles.loginBtn} onClick={handleSubmit}>Sign in</Button>
                     <Text>Not registered yet? <Text strong={'semiBold'} className={Styles.cursor} onClick={navigateTo}>Create an Account</Text></Text>
                 </div>
             </div>
