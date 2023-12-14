@@ -16,8 +16,7 @@ export const useHeader = () => {
         }).then(() => {
             navigate('/login');
         }).catch((err) => {
-            console.log('error', err);
-            alert('kuch error he bhai check in console')
+            alert('Some error occurred, please close the application and try again')
         })
     };
 
