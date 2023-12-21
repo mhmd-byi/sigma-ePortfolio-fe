@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const useRegister = () => {
     const navigate = useNavigate();
     const [loaderState, setLoaderState] = useState(false);
+    const [errMsg, setErrMsg] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         username: '',
@@ -36,6 +37,8 @@ export const useRegister = () => {
             sessionStorage.setItem('tokenExpireDate', res.data.tokens.access.expires);
             sessionStorage.setItem('userId', res.data.user.id);
             navigate('/dashboard');
+        }).catch((err) => {
+            setErrMsg(err.response.data.message);
         })
     };
 
@@ -44,5 +47,6 @@ export const useRegister = () => {
         handleChange,
         handleSubmit,
         loaderState,
+        errMsg,
     }
 };
