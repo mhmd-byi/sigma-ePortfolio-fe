@@ -7,6 +7,7 @@ import { Dropzone, FileMosaic } from "@files-ui/react";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import { useResume } from "./useResume";
+import { ProtectedRoute } from "../../components/security/protectedRoute";
 
 const ActionButtons = (props) => {
   const handleBack = () => {
@@ -117,6 +118,7 @@ const Two = (props) => {
               {...file}
               onDelete={removeFile}
               info
+              preview
             />
           ))}
         </Dropzone>
@@ -130,6 +132,7 @@ const Two = (props) => {
               {...file}
               onDelete={removeFile}
               info
+              preview
             />
           ))}
         </Dropzone>
@@ -185,21 +188,7 @@ const Two = (props) => {
 };
 
 const Three = (props) => {
-  const [files, setFiles] = React.useState([]);
-  const { handleChange } = useResume();
-  const updateFiles = (incommingFiles) => {
-    console.log("incomming files", incommingFiles);
-    setFiles(incommingFiles);
-  };
-  const removeFile = (id) => {
-    setFiles(files.filter((x) => x.id !== id));
-  };
-
-  const [value, setvalue] = useState("");
-
-  const handleOnchange = (val) => {
-    setvalue(val);
-  };
+  const { resumeDetails, handleChange, handleFileChange, removeFile } = props;
 
   const options = [
     { label: "Option 1", value: "option_1" },
@@ -216,47 +205,57 @@ const Three = (props) => {
       </div>
       <div className="mt-3">
         <Label>Intro Video</Label>
-        <Dropzone onChange={updateFiles} value={files}>
-          {files.map((file) => (
-            <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
+        <Dropzone onChange={(files) => handleFileChange(files, 'introVideo')} value={resumeDetails.introVideo} name="introVideo">
+          {resumeDetails?.introVideo?.map((file) => (
+            <FileMosaic
+              key={file.id}
+              {...file}
+              onDelete={removeFile}
+              info
+              preview
+            />
           ))}
         </Dropzone>
       </div>
       <div className="mt-3">
         <Label>Project Description</Label>
-        <Input type={"textarea"} rows={4} />
+        <Input type={"textarea"} rows={4} onChange={handleChange} inputName={'projectDescription'} />
       </div>
       <div className="mt-3">
         <Label>Projects Name</Label>
-        <Input type={"text"} />
+        <Input type={"text"} onChange={handleChange} inputName={'projectsName'} />
       </div>
       <div className="mt-3">
         <Label>Certificates/ Achievements</Label>
-        <Dropzone onChange={updateFiles} value={files}>
-          {files.map((file) => (
-            <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
+        <Dropzone onChange={(files) => handleFileChange(files, 'achievements')} value={resumeDetails.achievements} name="achievements">
+          {resumeDetails?.achievements?.map((file) => (
+            <FileMosaic key={file.id} {...file} onDelete={removeFile} info preview />
           ))}
         </Dropzone>
       </div>
       <div className="mt-3">
         <Label>Skills (Hard Skill & Soft Skill)</Label>
         <MultiSelect
-          onChange={handleOnchange}
+          onChange={handleChange}
           options={options}
           className="w-100 changeBorder"
+          name="skills"
+          value={resumeDetails.skills}
         />
       </div>
       <div className="mt-3">
         <Label>Languages</Label>
         <MultiSelect
-          onChange={handleOnchange}
+          onChange={handleChange}
           options={options}
           className="w-100 changeBorder"
+          name="languages"
+          value={resumeDetails.languages}
         />
       </div>
       <div className="mt-3">
         <Label>Interests</Label>
-        <Input type={"text"} />
+        <Input type={"text"} onChange={handleChange} inputName="interests" />
       </div>
       <ActionButtons {...props} />
     </Card>
@@ -264,33 +263,26 @@ const Three = (props) => {
 };
 
 const Four = (props) => {
-  const [files, setFiles] = React.useState([]);
-  const updateFiles = (incommingFiles) => {
-    console.log("incomming files", incommingFiles);
-    setFiles(incommingFiles);
-  };
-  const removeFile = (id) => {
-    setFiles(files.filter((x) => x.id !== id));
-  };
+  const { resumeDetails, handleChange, handleFileChange, removeFile } = props;
   return (
     <Card>
       <div>
         <Label>Course Name</Label>
-        <Input type={"text"} />
+        <Input type={"text"} onChange={handleChange} inputName="courseName" />
       </div>
       <div className="mt-3">
         <Label>Year</Label>
-        <Input type={"date"} rows={3} />
+        <Input type={"date"} rows={3} onChange={handleChange} name="year" />
       </div>
       <div className="mt-3">
         <Label>Percentage</Label>
-        <Input type={"number"} />
+        <Input type={"number"} onChange={handleChange} name="percentage" />
       </div>
       <div className="mt-3">
         <Label>Certificate</Label>
-        <Dropzone onChange={updateFiles} value={files}>
-          {files.map((file) => (
-            <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
+        <Dropzone onChange={(files) => handleFileChange(files, 'certificate')} value={resumeDetails.certificate} name="certificate">
+          {resumeDetails?.certificate?.map((file) => (
+            <FileMosaic key={file.id} {...file} onDelete={removeFile} info preview />
           ))}
         </Dropzone>
       </div>
@@ -300,23 +292,20 @@ const Four = (props) => {
 };
 
 const Five = (props) => {
+  const { resumeDetails, handleChange } = props;
   return (
     <Card>
       <div>
         <Label>Company’s Name</Label>
-        <Input type={"text"} />
-      </div>
-      <div className="mt-3">
-        <Label>Job Title</Label>
-        <Input type={"text"} />
+        <Input type={"text"} onChange={handleChange} inputName="companyName" />
       </div>
       <div className="mt-3">
         <Label>Working Year</Label>
-        <Input type={"date"} />
+        <Input type={"date"} onChange={handleChange} inputName="workingYear" />
       </div>
       <div className="mt-3">
         <Label>Detail</Label>
-        <Input type={"textarea"} />
+        <Input type={"textarea"} onChange={handleChange} inputName="details" />
       </div>
       <ActionButtons {...props} />
     </Card>
@@ -352,42 +341,44 @@ const Resume = () => {
   };
 
   return (
-    <div className={Styles.dashboard}>
-      <Sidebar />
-      <div className={Styles.main}>
-        <Header pageHeading={"E-Resume"} />
-        <div className={Styles.pageContent}>
-          <div className={Styles.stepWizard}>
-            <div className="d-flex align-items-center justify-content-between">
-              <Stepper
-                activeStep={activeStep}
-                className="w-100 justify-content-start px-1"
+    <ProtectedRoute>
+      <div className={Styles.dashboard}>
+        <Sidebar />
+        <div className={Styles.main}>
+          <Header pageHeading={"E-Resume"} />
+          <div className={Styles.pageContent}>
+            <div className={Styles.stepWizard}>
+              <div className="d-flex align-items-center justify-content-between">
+                <Stepper
+                  activeStep={activeStep}
+                  className="w-100 justify-content-start px-1"
+                >
+                  <Step label="Basic Details" className={`${Styles.stepView}`} />
+                  <Step label="Home Page" className={`${Styles.stepView}`} />
+                  <Step label="E-Resume" className={`${Styles.stepView}`} />
+                  <Step label="Education" className={`${Styles.stepView}`} />
+                  <Step label="Experience " className={`${Styles.stepView}`} />
+                </Stepper>
+                <Button variant={"main"} className={Styles.skipSave}>
+                  Skip & Save
+                </Button>
+              </div>
+              <StepWizard
+                instance={assignStepWizard}
+                onStepChange={handleStepChange}
+                className="mt-3"
               >
-                <Step label="Basic Details" className={`${Styles.stepView}`} />
-                <Step label="Home Page" className={`${Styles.stepView}`} />
-                <Step label="E-Resume" className={`${Styles.stepView}`} />
-                <Step label="Education" className={`${Styles.stepView}`} />
-                <Step label="Experience " className={`${Styles.stepView}`} />
-              </Stepper>
-              <Button variant={"main"} className={Styles.skipSave}>
-                Skip & Save
-              </Button>
+                <One userCallback={assignUser} resumeDetails={resumeDetails} handleChange={handleChange} />
+                <Two userCallback={assignUser} resumeDetails={resumeDetails} handleChange={handleChange} handleFileChange={handleFileChange} removeFile={removeFile} />
+                <Three userCallback={assignUser} resumeDetails={resumeDetails} handleChange={handleChange} handleFileChange={handleFileChange} removeFile={removeFile} />
+                <Four userCallback={assignUser} resumeDetails={resumeDetails} handleChange={handleChange} handleFileChange={handleFileChange} removeFile={removeFile} />
+                <Five user={user} completeCallback={handleComplete} resumeDetails={resumeDetails} handleChange={handleChange} />
+              </StepWizard>
             </div>
-            <StepWizard
-              instance={assignStepWizard}
-              onStepChange={handleStepChange}
-              className="mt-3"
-            >
-              <One userCallback={assignUser} resumeDetails={resumeDetails} handleChange={handleChange} />
-              <Two userCallback={assignUser} resumeDetails={resumeDetails} handleChange={handleChange} handleFileChange={handleFileChange} removeFile={removeFile} />
-              <Three userCallback={assignUser} />
-              <Four userCallback={assignUser} />
-              <Five user={user} completeCallback={handleComplete} />
-            </StepWizard>
           </div>
         </div>
       </div>
-    </div>
+    </ProtectedRoute>
   );
 };
 
