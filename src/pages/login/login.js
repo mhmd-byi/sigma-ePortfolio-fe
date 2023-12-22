@@ -4,11 +4,12 @@ import {Button, Heading, Image, Input, Label, Text} from '../../components';
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "./useLogin";
 import { Loader } from "../../components/shared/loader/loader";
+import { Alert } from "@mui/material";
 
 const Login = () => { 
     const navigate = useNavigate()
     const navigateTo = () => navigate('/register');
-    const { handleChange, handleSubmit, formData, loaderState } = useLogin();
+    const { handleChange, handleSubmit, formData, loaderState, errMsg } = useLogin();
   
     return (
         <div className={Styles.login}>
@@ -44,6 +45,7 @@ const Login = () => {
                         </div>
                         <Text variant={'md'} strong={'semiBold'} className={Styles.cursor}>Forgot Password?</Text>
                     </div>
+                    {errMsg && <Alert severity="error">{errMsg}</Alert>}
                     <Button className={Styles.loginBtn} onClick={handleSubmit}>Sign in</Button>
                     <Text>Not registered yet? <Text strong={'semiBold'} className={Styles.cursor} onClick={navigateTo}>Create an Account</Text></Text>
                 </div>

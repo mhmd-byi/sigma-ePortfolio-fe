@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const useLogin = () => {
     const navigate = useNavigate();
     const [loaderState, setLoaderState] = useState(false);
+    const [errMsg, setErrMsg] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         password: '',
@@ -31,8 +32,7 @@ export const useLogin = () => {
             navigate('/dashboard');
         }).catch(() => {
             setLoaderState(false);
-            alert('Invalid email or password');
-            window.location.reload();
+            setErrMsg('Invalid email or password')
         })
     }
 
@@ -41,5 +41,6 @@ export const useLogin = () => {
         handleChange,
         formData,
         loaderState,
+        errMsg,
     }
 };
