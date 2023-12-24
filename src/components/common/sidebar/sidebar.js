@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Styles from './sidebar.module.scss';
 import { Button, Heading, Icon, Image, Text } from '../../shared';
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,20 @@ const Sidebar = () => {
     const ToDashboard = () => navigate('/dashboard');
     const ToResume = () => navigate('/resume');
     const ToPortfolio = () => navigate('/portfolio');
+    const url = window.location.href;
+    const [activeButton, setActiveButton] = useState('');
+
+    useEffect(() => {
+        if (url.includes('dashboard')) {
+            setActiveButton('Dashboard');
+        }
+        if (url.includes('resume')) {
+            setActiveButton('E-Resume');
+        }
+        if (url.includes('portfolio')) {
+            setActiveButton('E-Portfolio');
+        }
+    }, [url])
 
     return (
         <div className={Styles.sidebar}>
@@ -16,9 +30,9 @@ const Sidebar = () => {
             </div>
             <div className={Styles.menus}>
                 <ul>
-                    <li onClick={ToDashboard} className={Styles.active}><Icon className={'icon-dashboard'} /> <Text>Dashboard</Text></li>
-                    <li onClick={ToResume}><Icon className={'icon-resume'} /> <Text>E-Resume</Text></li>
-                    <li onClick={ToPortfolio}><Icon className={'icon-portfolio'} /> <Text>E-Portfolio</Text></li>
+                    <li onClick={ToDashboard} className={activeButton === 'Dashboard' && Styles.active}><Icon className={'icon-dashboard'} /> <Text>Dashboard</Text></li>
+                    <li onClick={ToResume} className={activeButton === 'E-Resume' && Styles.active}><Icon className={'icon-resume'} /> <Text>E-Resume</Text></li>
+                    <li onClick={ToPortfolio} className={activeButton === 'E-Portfolio' && Styles.active}><Icon className={'icon-portfolio'} /> <Text>E-Portfolio</Text></li>
                     <li><Icon className={'icon-contacts'} /> <Text>Contacts</Text></li>
                     <li><Icon className={'icon-anlytics'} /> <Text>Analytics</Text></li>
                 </ul>

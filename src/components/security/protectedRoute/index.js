@@ -15,6 +15,7 @@ export const ProtectedRoute = ({ children }) => {
     useEffect(() => {
         if (!token || (tokenExpireDate && !isTokenValid(tokenExpireDate))) {
             navigate('/login');
+            window.location.reload();
         }
     }, [token, tokenExpireDate, navigate]);
 
