@@ -22,12 +22,13 @@ const Register = () => {
 
                     <Heading headingText={'Sign Up'} headingType={'h2'} />
                     <Text variant={'lg'} color={'secondary'}>Enter your email and password to sign in!</Text>
-                    <Button className={Styles.googleBtn}><Image src="images/google.svg" /> Sign up with Google</Button>
+                    {/*<Button className={Styles.googleBtn}><Image src="images/google.svg" /> Sign up with Google</Button>
                     <div className={Styles.or}>
                         <div className={Styles.left}></div>
                         <Text>Or</Text>
                         <div className={Styles.right}></div>
-                    </div>
+                    </div>*/}
+                    <div className="mb-3">&nbsp;</div>
                     <div className="mb-3">
                         <Label>Your name*</Label>
                         <Input type='text' placeholder='Name' inputName='name' value={formData.name} onChange={handleChange} />

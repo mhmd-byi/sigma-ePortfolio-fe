@@ -22,12 +22,13 @@ const Login = () => {
 
                     <Heading headingText={'Sign In'} headingType={'h2'} />
                     <Text variant={'lg'} color={'secondary'}>Enter your email and password to sign in!</Text>
-                    <Button className={Styles.googleBtn}><Image src="images/google.svg" /> Sign in with Google</Button>
+                    {/*<Button className={Styles.googleBtn}><Image src="images/google.svg" /> Sign in with Google</Button>
                     <div className={Styles.or}>
                         <div className={Styles.left}></div>
                         <Text>Or</Text>
                         <div className={Styles.right}></div>
-                    </div>
+                    </div>*/}
+                    <div className="mb-3">&nbsp;</div>
                     <div className="mb-3">
                         <Label>Email*</Label>
                         <Input type={'email'} inputName='email' placeholder={'mail@simmmple.com'} value={formData.email} onChange={handleChange} />
