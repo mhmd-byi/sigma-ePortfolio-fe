@@ -1,6 +1,7 @@
 import {
   Dashboard, Login, Portfolio, Register, Resume, ResumeForm, Subscribe,
 } from './pages'
+import viewPortfolio from './pages/viewPortfolio'
 
 
 export const routes = [
@@ -43,5 +44,10 @@ export const routes = [
     path: '/resume/new-resume',
     component: ResumeForm,
     exact: true
-  }
+  },
+  {
+    path: '/portfolio/view-portfolio',
+    component: viewPortfolio,
+    exact: true
+  },
 ]
