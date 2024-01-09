@@ -2,6 +2,7 @@ import {
   Dashboard, Login, Portfolio, Register, Resume, ResumeForm, Subscribe,
 } from './pages'
 import viewPortfolio from './pages/viewPortfolio'
+import viewResume from './pages/viewResume'
 
 
 export const routes = [
@@ -48,6 +49,11 @@ export const routes = [
   {
     path: '/portfolio/view-portfolio',
     component: viewPortfolio,
+    exact: true
+  },
+  {
+    path: '/resume/view-resume',
+    component: viewResume,
     exact: true
   },
 ]

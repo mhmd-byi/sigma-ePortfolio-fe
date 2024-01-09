@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const Resume = () => {
   const navigate = useNavigate();
-  const ToResume = () => navigate("/resume");
+  const ToResume = () => navigate("/resume/new-resume");
+  const viewResume = () => navigate("/resume/view-resume")
   const { userDetails } = useResume();
 
   return (
@@ -33,7 +34,7 @@ const Resume = () => {
                 <Button>
                   <Icon className={"icon-edit"} /> Edit
                 </Button>
-                <Button>
+                <Button onClick={viewResume}>
                   <Icon className={"icon-view"} /> View
                 </Button>
                 <Button>

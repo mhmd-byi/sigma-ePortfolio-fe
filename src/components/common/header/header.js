@@ -22,7 +22,7 @@ const Header = ({pageHeading}) => {
                 </div>
                 <div className={Styles.profile}>
                     <div className={`dropdown-toggle ${Styles.toggle}`} data-bs-toggle="dropdown" aria-expanded="false">
-                        <Image src='images/avatar.png' />
+                        <Image src='/images/avatar.png' />
                     </div>
                     <ul className={`${Styles.dropdown} dropdown-menu`}>
                         <li>Account settings</li>

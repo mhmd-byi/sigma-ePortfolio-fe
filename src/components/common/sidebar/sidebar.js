@@ -26,7 +26,7 @@ const Sidebar = () => {
     return (
         <div className={Styles.sidebar}>
             <div className={Styles.logo}>
-                <Image src='images/logo.svg' />
+                <Image src='/images/logo.svg' />
             </div>
             <div className={Styles.menus}>
                 <ul>
