@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import Styles from "../dashboard/dashboard.module.scss";
-import { Button, Card, Header, Icon, Input, Label, Sidebar, Text } from "../../components";
+import {
+  Button,
+  Card,
+  Header,
+  Icon,
+  Input,
+  Label,
+  Sidebar,
+  Text,
+} from "../../components";
 import { Stepper, Step } from "react-form-stepper";
 import StepWizard from "react-step-wizard";
 import { Dropzone, FileMosaic } from "@files-ui/react";
@@ -98,6 +107,33 @@ const One = (props) => {
           onChange={handleChange}
         />
       </div>
+        <div className="mt-3">
+          <Label>LinkedIn Profile</Label>
+          <Input
+            type={"text"}
+            placeholder={"LinkedIn Profile URL"}
+            inputName={"likedinProfileUrl"}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mt-3">
+          <Label>Email Address</Label>
+          <Input
+            type={"text"}
+            placeholder={"Enter Email Address"}
+            inputName={"emailAddress"}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mt-3">
+          <Label>Phone Number</Label>
+          <Input
+            type={"text"}
+            placeholder={"Phone Number"}
+            inputName={"phoneNumber"}
+            onChange={handleChange}
+          />
+        </div>
 
       <ActionButtons {...props} />
     </Card>
@@ -111,7 +147,11 @@ const Two = (props) => {
     <Card>
       <div>
         <Label>Banner Photo/ Logo</Label>
-        <Dropzone onChange={(files) => handleFileChange(files, 'bannerImage')} value={resumeDetails.bannerImage} name="bannerImage">
+        <Dropzone
+          onChange={(files) => handleFileChange(files, "bannerImage")}
+          value={resumeDetails.bannerImage}
+          name="bannerImage"
+        >
           {resumeDetails?.bannerImage?.map((file) => (
             <FileMosaic
               key={file.id}
@@ -125,7 +165,11 @@ const Two = (props) => {
       </div>
       <div className="mt-3">
         <Label>Profile Picture</Label>
-        <Dropzone onChange={(files) => handleFileChange(files, 'profilePhoto')} value={resumeDetails.profilePhoto} name="profilePhoto">
+        <Dropzone
+          onChange={(files) => handleFileChange(files, "profilePhoto")}
+          value={resumeDetails.profilePhoto}
+          name="profilePhoto"
+        >
           {resumeDetails?.profilePhoto?.map((file) => (
             <FileMosaic
               key={file.id}
@@ -143,17 +187,35 @@ const Two = (props) => {
       <div className="mt-3">
         <Label>Select Theme Colour</Label>
         <div className={Styles.themeSelect}>
-          <input type="radio" name="theme" id="red" value="red" onChange={handleChange} />
+          <input
+            type="radio"
+            name="theme"
+            id="red"
+            value="red"
+            onChange={handleChange}
+          />
           <label htmlFor="red" className={Styles.red}>
             Red
           </label>
 
-          <input type="radio" name="theme" id="green" value="green" onChange={handleChange} />
+          <input
+            type="radio"
+            name="theme"
+            id="green"
+            value="green"
+            onChange={handleChange}
+          />
           <label htmlFor="green" className={Styles.green}>
             Green
           </label>
 
-          <input type="radio" name="theme" id="blue" value="blue" onChange={handleChange} />
+          <input
+            type="radio"
+            name="theme"
+            id="blue"
+            value="blue"
+            onChange={handleChange}
+          />
           <label htmlFor="blue" className={Styles.blue}>
             Blue
           </label>
@@ -161,7 +223,12 @@ const Two = (props) => {
       </div>
       <div className="mt-3">
         <Label>Custom Domain</Label>
-        <Input type={"text"} placeholder={"Enter Domain"} onChange={handleChange} inputName={'customDomain'} />
+        <Input
+          type={"text"}
+          placeholder={"Enter Domain"}
+          onChange={handleChange}
+          inputName={"customDomain"}
+        />
         <Text variant={"md"} color={"secondary"}>
           Your Card Link will be:{" "}
           <Text strong={"semiBold"} color={"dark"}>
@@ -200,12 +267,12 @@ const Three = (props) => {
   return (
     <Card>
       <div>
-        <Label>Summary/ About me</Label>
-        <Input type={"textarea"} rows={4} onChange={handleChange} inputName={'aboutMe'} />
-      </div>
-      <div className="mt-3">
         <Label>Intro Video</Label>
-        <Dropzone onChange={(files) => handleFileChange(files, 'introVideo')} value={resumeDetails.introVideo} name="introVideo">
+        <Dropzone
+          onChange={(files) => handleFileChange(files, "introVideo")}
+          value={resumeDetails.introVideo}
+          name="introVideo"
+        >
           {resumeDetails?.introVideo?.map((file) => (
             <FileMosaic
               key={file.id}
@@ -218,23 +285,51 @@ const Three = (props) => {
         </Dropzone>
       </div>
       <div className="mt-3">
-        <Label>Project Description</Label>
-        <Input type={"textarea"} rows={4} onChange={handleChange} inputName={'projectDescription'} />
+        <Label>Summary/ About me</Label>
+        <Input
+          type={"textarea"}
+          rows={4}
+          onChange={handleChange}
+          inputName={"aboutMe"}
+        />
       </div>
       <div className="mt-3">
         <Label>Projects Name</Label>
-        <Input type={"text"} onChange={handleChange} inputName={'projectsName'} />
+        <Input
+          type={"text"}
+          onChange={handleChange}
+          inputName={"projectsName"}
+        />
+      </div>
+      <div className="mt-3">
+        <Label>Project Description</Label>
+        <Input
+          type={"textarea"}
+          rows={4}
+          onChange={handleChange}
+          inputName={"projectDescription"}
+        />
       </div>
       <div className="mt-3">
         <Label>Certificates/ Achievements</Label>
-        <Dropzone onChange={(files) => handleFileChange(files, 'achievements')} value={resumeDetails.achievements} name="achievements">
+        <Dropzone
+          onChange={(files) => handleFileChange(files, "achievements")}
+          value={resumeDetails.achievements}
+          name="achievements"
+        >
           {resumeDetails?.achievements?.map((file) => (
-            <FileMosaic key={file.id} {...file} onDelete={removeFile} info preview />
+            <FileMosaic
+              key={file.id}
+              {...file}
+              onDelete={removeFile}
+              info
+              preview
+            />
           ))}
         </Dropzone>
       </div>
       <div className="mt-3">
-        <Label>Skills (Hard Skill & Soft Skill)</Label>
+        <Label>Hard Skills</Label>
         <MultiSelect
           onChange={handleChange}
           options={options}
@@ -244,7 +339,7 @@ const Three = (props) => {
         />
       </div>
       <div className="mt-3">
-        <Label>Languages</Label>
+        <Label>Soft Skills</Label>
         <MultiSelect
           onChange={handleChange}
           options={options}
@@ -253,10 +348,10 @@ const Three = (props) => {
           value={resumeDetails.languages}
         />
       </div>
-      <div className="mt-3">
+      {/*<div className="mt-3">
         <Label>Interests</Label>
         <Input type={"text"} onChange={handleChange} inputName="interests" />
-      </div>
+          </div>*/}
       <ActionButtons {...props} />
     </Card>
   );
@@ -271,8 +366,18 @@ const Four = (props) => {
         <Input type={"text"} onChange={handleChange} inputName="courseName" />
       </div>
       <div className="mt-3">
-        <Label>Year</Label>
-        <Input type={"date"} rows={3} onChange={handleChange} name="year" />
+        <Label>University/School Name</Label>
+        <Input type={"text"} onChange={handleChange} inputName="courseName" />
+      </div>
+      <div className="row">
+        <div className="mt-3 col-sm-6">
+          <Label>Start Year</Label>
+          <Input type={"date"} rows={3} onChange={handleChange} name="year" />
+        </div>
+        <div className="mt-3 col-sm-6">
+          <Label>End Year</Label>
+          <Input type={"date"} rows={3} onChange={handleChange} name="year" />
+        </div>
       </div>
       <div className="mt-3">
         <Label>Percentage</Label>
@@ -280,9 +385,19 @@ const Four = (props) => {
       </div>
       <div className="mt-3">
         <Label>Certificate</Label>
-        <Dropzone onChange={(files) => handleFileChange(files, 'certificate')} value={resumeDetails.certificate} name="certificate">
+        <Dropzone
+          onChange={(files) => handleFileChange(files, "certificate")}
+          value={resumeDetails.certificate}
+          name="certificate"
+        >
           {resumeDetails?.certificate?.map((file) => (
-            <FileMosaic key={file.id} {...file} onDelete={removeFile} info preview />
+            <FileMosaic
+              key={file.id}
+              {...file}
+              onDelete={removeFile}
+              info
+              preview
+            />
           ))}
         </Dropzone>
       </div>
@@ -300,8 +415,26 @@ const Five = (props) => {
         <Input type={"text"} onChange={handleChange} inputName="companyName" />
       </div>
       <div className="mt-3">
-        <Label>Working Year</Label>
-        <Input type={"date"} onChange={handleChange} inputName="workingYear" />
+        <Label>Profile</Label>
+        <Input type={"text"} onChange={handleChange} inputName="companyName" />
+      </div>
+      <div className="row">
+        <div className="mt-3 col-lg-6">
+          <Label>Start Year</Label>
+          <Input
+            type={"date"}
+            onChange={handleChange}
+            inputName="workingYear"
+          />
+        </div>
+        <div className="mt-3 col-lg-6">
+          <Label>End Year</Label>
+          <Input
+            type={"date"}
+            onChange={handleChange}
+            inputName="workingYear"
+          />
+        </div>
       </div>
       <div className="mt-3">
         <Label>Detail</Label>
@@ -315,7 +448,8 @@ const Five = (props) => {
 const ResumeForm = () => {
   const [user, setUser] = useState({});
   const [activeStep, setActiveStep] = useState(0);
-  const { resumeDetails, handleChange, handleFileChange, removeFile } = useResumeForm();
+  const { resumeDetails, handleChange, handleFileChange, removeFile } =
+    useResumeForm();
 
   const assignStepWizard = (instance) => {
     //   setStepWizard(instance);
@@ -353,7 +487,10 @@ const ResumeForm = () => {
                   activeStep={activeStep}
                   className="w-100 justify-content-start px-1"
                 >
-                  <Step label="Basic Details" className={`${Styles.stepView}`} />
+                  <Step
+                    label="Basic Details"
+                    className={`${Styles.stepView}`}
+                  />
                   <Step label="Home Page" className={`${Styles.stepView}`} />
                   <Step label="E-Resume" className={`${Styles.stepView}`} />
                   <Step label="Education" className={`${Styles.stepView}`} />
@@ -368,11 +505,38 @@ const ResumeForm = () => {
                 onStepChange={handleStepChange}
                 className="mt-3"
               >
-                <One userCallback={assignUser} resumeDetails={resumeDetails} handleChange={handleChange} />
-                <Two userCallback={assignUser} resumeDetails={resumeDetails} handleChange={handleChange} handleFileChange={handleFileChange} removeFile={removeFile} />
-                <Three userCallback={assignUser} resumeDetails={resumeDetails} handleChange={handleChange} handleFileChange={handleFileChange} removeFile={removeFile} />
-                <Four userCallback={assignUser} resumeDetails={resumeDetails} handleChange={handleChange} handleFileChange={handleFileChange} removeFile={removeFile} />
-                <Five user={user} completeCallback={handleComplete} resumeDetails={resumeDetails} handleChange={handleChange} />
+                <One
+                  userCallback={assignUser}
+                  resumeDetails={resumeDetails}
+                  handleChange={handleChange}
+                />
+                <Two
+                  userCallback={assignUser}
+                  resumeDetails={resumeDetails}
+                  handleChange={handleChange}
+                  handleFileChange={handleFileChange}
+                  removeFile={removeFile}
+                />
+                <Three
+                  userCallback={assignUser}
+                  resumeDetails={resumeDetails}
+                  handleChange={handleChange}
+                  handleFileChange={handleFileChange}
+                  removeFile={removeFile}
+                />
+                <Four
+                  userCallback={assignUser}
+                  resumeDetails={resumeDetails}
+                  handleChange={handleChange}
+                  handleFileChange={handleFileChange}
+                  removeFile={removeFile}
+                />
+                <Five
+                  user={user}
+                  completeCallback={handleComplete}
+                  resumeDetails={resumeDetails}
+                  handleChange={handleChange}
+                />
               </StepWizard>
             </div>
           </div>
