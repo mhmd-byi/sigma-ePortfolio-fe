@@ -1,5 +1,5 @@
 import {
-  Dashboard, Login, Portfolio, Register, Resume, ResumeForm, Subscribe,
+  Dashboard, Login, Portfolio, PortfolioForm, Register, Resume, ResumeForm, Subscribe,
 } from './pages'
 import viewPortfolio from './pages/viewPortfolio'
 import viewResume from './pages/viewResume'
@@ -39,6 +39,11 @@ export const routes = [
   {
     path: '/subscribe',
     component: Subscribe,
+    exact: true
+  },
+  {
+    path: '/portfolio/new-portfolio',
+    component: PortfolioForm,
     exact: true
   }, 
   {
