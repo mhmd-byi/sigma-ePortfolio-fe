@@ -30,46 +30,41 @@ export const useResumeForm = () => {
   });
   const [errMsg, setErrMsg] = useState("");
   const token = sessionStorage.getItem("token");
+
   const getUserDetails = () => {
     axios({
       method: "GET",
-      url: `${process.env.REACT_APP_API_URL}users/${sessionStorage.getItem(
-        "userId"
-      )}`,
+      url: `${process.env.REACT_APP_API_URL}users/${sessionStorage.getItem("userId")}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => {
-        setResumeDetails({
+        setResumeDetails(prevDetails => ({
+          ...prevDetails,
           name: res.data.name,
           email: res.data.email,
           phone: res.data.phone,
-        });
+        }));
       })
       .catch((e) => {
         setErrMsg(e.message);
       });
   }
+
   useEffect(() => {
     if (token) {
-        getUserDetails()
+      getUserDetails();
     }
   }, [token]);
 
   const handleChange = (e) => {
     if (e?.target?.name && e.target.type !== 'file' && e.target.type !== 'select-multiple') {
-      setResumeDetails({ ...resumeDetails, [e.target.name]: e.target.value });
-    }
-    
-    else if (e?.target?.name && e.target.type === 'file') {
-      const file = e.target.files[0];
-      if (file) {
-        setResumeDetails({ ...resumeDetails, [e.target.name]: [file] });
-      }
-    }
-  
-    else if (e?.target?.name && e.target.type === 'select-multiple') {
+      setResumeDetails(prevDetails => ({ ...prevDetails, [e.target.name]: e.target.value }));
+    } else if (e?.target?.name && e.target.type === 'file') {
+      const files = Array.from(e.target.files);
+      setResumeDetails(prevDetails => ({ ...prevDetails, [e.target.name]: files }));
+    } else if (e?.target?.name && e.target.type === 'select-multiple') {
       const options = e.target.options;
       const selectedValues = [];
       for (let i = 0; i < options.length; i++) {
@@ -77,17 +72,37 @@ export const useResumeForm = () => {
           selectedValues.push(options[i].value);
         }
       }
-      setResumeDetails({ ...resumeDetails, [e.target.name]: selectedValues });
+      setResumeDetails(prevDetails => ({ ...prevDetails, [e.target.name]: selectedValues }));
     }
   };
-  
 
   const removeFile = (fieldName) => {
-    setResumeDetails({ ...resumeDetails, [fieldName]: [] });
+    setResumeDetails(prevDetails => ({ ...prevDetails, [fieldName]: [] }));
   };
 
   const handleFileChange = (files, fieldName) => {
-    setResumeDetails({ ...resumeDetails, [fieldName]: files });
+    setResumeDetails(prevDetails => ({ ...prevDetails, [fieldName]: files }));
+  };
+
+  const handleSubmit = async () => {
+    console.log("Final submission data:", resumeDetails);
+    
+    // Example of logging FormData if you were preparing to submit files
+    const formData = new FormData();
+    Object.entries(resumeDetails).forEach(([key, value]) => {
+      if (Array.isArray(value)) { // Check if the value is an array (e.g., files)
+        value.forEach(file => {
+          formData.append(key, file);
+        });
+      } else {
+        formData.append(key, value);
+      }
+    });
+  
+    // Log each key-value pair in formData for demonstration purposes
+    // for (let pair of formData.entries()) {
+    //   console.log(`${pair[0]}:`, pair[1]);
+    // }
   };
 
   return {
@@ -96,5 +111,6 @@ export const useResumeForm = () => {
     handleChange,
     removeFile,
     handleFileChange,
+    handleSubmit, // Make sure to return this
   };
 };

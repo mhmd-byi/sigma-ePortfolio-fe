@@ -27,8 +27,11 @@ const ActionButtons = (props) => {
     props.nextStep();
   };
 
+  const { handleSubmit } = useResumeForm();
+
   const handleFinish = () => {
     props.lastStep();
+    handleSubmit();
   };
 
   return (
@@ -45,7 +48,7 @@ const ActionButtons = (props) => {
           </Button>
         )}
         {props.currentStep === props.totalSteps && (
-          <Button variant={"primarySolid"} onClick={handleFinish}>
+          <Button type='submit' variant={"primarySolid"} onClick={handleFinish}>
             Finish{" "}
           </Button>
         )}
@@ -243,6 +246,7 @@ const Two = (props) => {
             type="checkbox"
             role="switch"
             id="flexSwitchCheckChecked"
+            onChange={handleChange}
           />
           <label class="form-check-label" for="flexSwitchCheckChecked">
             Hide Branding
