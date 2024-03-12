@@ -119,25 +119,6 @@ const One = (props) => {
             onChange={handleChange}
           />
         </div>
-        <div className="mt-3">
-          <Label>Email Address</Label>
-          <Input
-            type={"text"}
-            placeholder={"Enter Email Address"}
-            inputName={"emailAddress"}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mt-3">
-          <Label>Phone Number</Label>
-          <Input
-            type={"text"}
-            placeholder={"Phone Number"}
-            inputName={"phoneNumber"}
-            onChange={handleChange}
-          />
-        </div>
-
       <ActionButtons {...props} />
     </Card>
   );
