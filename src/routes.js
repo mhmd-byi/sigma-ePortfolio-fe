@@ -1,6 +1,7 @@
 import {
   Dashboard, Login, Portfolio, PortfolioForm, Register, Resume, ResumeForm, Subscribe,
 } from './pages'
+import MainForm from './pages/createTaskMultiStepForm/MultiStepForm'
 import viewPortfolio from './pages/viewPortfolio'
 import viewResume from './pages/viewResume'
 
@@ -59,6 +60,11 @@ export const routes = [
   {
     path: '/resume/view-resume',
     component: viewResume,
+    exact: true
+  },
+  {
+    path: 'multi-step-form',
+    component: MainForm,
     exact: true
   },
 ]

@@ -84,7 +84,8 @@ export const useResumeForm = () => {
     setResumeDetails(prevDetails => ({ ...prevDetails, [fieldName]: files }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (files, fieldName) => {
+    setResumeDetails(prevDetails => ({ ...prevDetails, [fieldName]: files }));
     console.log("Final submission data:", resumeDetails);
     
     // Example of logging FormData if you were preparing to submit files
