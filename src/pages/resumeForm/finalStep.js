@@ -10,20 +10,28 @@ import "react-multiple-select-dropdown-lite/dist/index.css";
 import { useResumeForm } from "./useResumeForm";
 
 const ActionButtons = (props) => {
-    const handleBack = () => {
-      props.previousStep();
-    };
-  
-    const handleNext = () => {
-      props.nextStep();
-    };
-  
-    const { handleSubmit } = useResumeForm();
-  
-    const handleFinish = () => {
-      props.lastStep();
-      handleSubmit();
-    };
+  const { onHandleNext } = props; // Custom handler for the Next button
+
+  const handleBack = () => {
+    props.previousStep();
+  };
+
+  const handleNext = (e) => {
+    e.preventDefault();
+    if (onHandleNext) {
+      onHandleNext(); // Use the custom handler if provided
+    } else {
+      props.nextStep(); // Default behavior
+    }
+  };
+
+  const { handleSubmit } = useResumeForm();
+
+  const handleFinish = (e) => {
+    e.preventDefault();
+    props.lastStep();
+    handleSubmit(resumeDetails);
+  };
   
     return (
       <div className="d-flex align-items-center justify-content-between mt-5">
@@ -50,8 +58,12 @@ const ActionButtons = (props) => {
 
 const Five = (props) => {
     const { resumeDetails, handleChange } = props;
+    const handleFinish = () => {
+      console.log("Current Resume Details:", resumeDetails);
+    };
     return (
       <Card>
+      <form>
         <div>
           <Label>Company’s Name</Label>
           <Input type={"text"} onChange={handleChange} inputName="companyName" />
@@ -66,7 +78,7 @@ const Five = (props) => {
             <Input
               type={"date"}
               onChange={handleChange}
-              inputName="workingYear"
+              inputName="startYear"
             />
           </div>
           <div className="mt-3 col-lg-6">
@@ -74,7 +86,7 @@ const Five = (props) => {
             <Input
               type={"date"}
               onChange={handleChange}
-              inputName="workingYear"
+              inputName="endYear"
             />
           </div>
         </div>
@@ -82,7 +94,8 @@ const Five = (props) => {
           <Label>Detail</Label>
           <Input type={"textarea"} onChange={handleChange} inputName="details" />
         </div>
-        <ActionButtons {...props} />
+        <ActionButtons {...props} handleSubmit={handleFinish}/>
+        </form>
       </Card>
     );
   };

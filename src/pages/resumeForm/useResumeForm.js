@@ -84,26 +84,25 @@ export const useResumeForm = () => {
     setResumeDetails(prevDetails => ({ ...prevDetails, [fieldName]: files }));
   };
 
-  const handleSubmit = async (files, fieldName) => {
-    setResumeDetails(prevDetails => ({ ...prevDetails, [fieldName]: files }));
-    console.log("Final submission data:", resumeDetails);
-    
-    // Example of logging FormData if you were preparing to submit files
+  const handleSubmit = async (formDataForSubmission) => {
+    console.log("Final submission data:", formDataForSubmission);
+  
+    // Continue with the FormData preparation and submission as previously outlined
     const formData = new FormData();
-    Object.entries(resumeDetails).forEach(([key, value]) => {
-      if (Array.isArray(value)) { // Check if the value is an array (e.g., files)
-        value.forEach(file => {
-          formData.append(key, file);
-        });
+    Object.entries(formDataForSubmission).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach(file => formData.append(key, file));
       } else {
         formData.append(key, value);
       }
     });
   
-    // Log each key-value pair in formData for demonstration purposes
-    // for (let pair of formData.entries()) {
-    //   console.log(`${pair[0]}:`, pair[1]);
-    // }
+    // Example: Log FormData entries (for demonstration, adjust as needed for actual submission)
+    for (let pair of formData.entries()) {
+      console.log(`${pair[0]}:`, pair[1]);
+    }
+  
+    // Submit formData here as needed
   };
 
   return {

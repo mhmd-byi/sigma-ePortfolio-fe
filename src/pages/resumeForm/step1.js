@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Button,
-  Card,
-  Icon,
-  Input,
-  Label,
-  Text,
-} from "../../components";
+import { Button, Card, Icon, Input, Label, Text } from "../../components";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import { useResumeForm } from "./useResumeForm";
 
@@ -17,11 +10,12 @@ const ActionButtons = (props) => {
     props.previousStep();
   };
 
-  const handleNext = () => {
+  const handleNext = (e) => {
+    e.preventDefault(); 
     if (onHandleNext) {
-      onHandleNext(); // Use the custom handler if provided
+      onHandleNext();
     } else {
-      props.nextStep(); // Default behavior
+      props.nextStep();
     }
   };
 
@@ -31,38 +25,39 @@ const ActionButtons = (props) => {
     props.lastStep();
     handleSubmit();
   };
-  
-    return (
-      <div className="d-flex align-items-center justify-content-between mt-5">
-        {props.currentStep > 1 && (
-          <Button variant={"secondary"} onClick={handleBack}>
-            <Icon className={"icon-left"} /> Prev
+
+  return (
+    <div className="d-flex align-items-center justify-content-between mt-5">
+      {props.currentStep > 1 && (
+        <Button variant={"secondary"} onClick={handleBack}>
+          <Icon className={"icon-left"} /> Prev
+        </Button>
+      )}
+      <div className="d-flex align-items-center justify-content-between ms-auto">
+        {props.currentStep < props.totalSteps && (
+          <Button type="submit" variant={"primary"} onClick={handleNext}>
+            Next <Icon className={"icon-right"} />
           </Button>
         )}
-        <div className="d-flex align-items-center justify-content-between ms-auto">
-          {props.currentStep < props.totalSteps && (
-            <Button variant={"primary"} onClick={handleNext}>
-              Next <Icon className={"icon-right"} />
-            </Button>
-          )}
-          {props.currentStep === props.totalSteps && (
-            <Button type='submit' variant={"primarySolid"} onClick={handleFinish}>
-              Finish{" "}
-            </Button>
-          )}
-        </div>
+        {props.currentStep === props.totalSteps && (
+          <Button type="submit" variant={"primarySolid"} onClick={handleFinish}>
+            Finish{" "}
+          </Button>
+        )}
       </div>
-    );
-  };
+    </div>
+  );
+};
 
 const One = (props) => {
-    const { resumeDetails, handleChange, nextStep  } = props;
-    const handleNext = () => {
-      console.log("Current Resume Details:", resumeDetails);
-      nextStep(); // Move to the next step after logging
-    };
-    return (
-      <Card>
+  const { resumeDetails, handleChange, nextStep } = props;
+  const handleNext = () => {
+    console.log("Current Resume Details:", resumeDetails);
+    nextStep(); // Move to the next step after logging
+  };
+  return (
+    <Card>
+      <form>
         <div>
           <Label>Name*</Label>
           <Input
@@ -112,18 +107,19 @@ const One = (props) => {
             onChange={handleChange}
           />
         </div>
-          <div className="mt-3">
-            <Label>LinkedIn Profile</Label>
-            <Input
-              type={"text"}
-              placeholder={"LinkedIn Profile URL"}
-              inputName={"likedinProfileUrl"}
-              onChange={handleChange}
-            />
-          </div>
-        <ActionButtons {...props} onHandleNext={handleNext}/>
-      </Card>
-    );
-  };
+        <div className="mt-3">
+          <Label>LinkedIn Profile</Label>
+          <Input
+            type={"text"}
+            placeholder={"LinkedIn Profile URL"}
+            inputName={"likedinProfileUrl"}
+            onChange={handleChange}
+          />
+        </div>
+        <ActionButtons {...props} onHandleNext={handleNext} />
+      </form>
+    </Card>
+  );
+};
 
-  export default One;
+export default One;

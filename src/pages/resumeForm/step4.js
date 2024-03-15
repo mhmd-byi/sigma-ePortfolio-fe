@@ -17,7 +17,8 @@ const ActionButtons = (props) => {
     props.previousStep();
   };
 
-  const handleNext = () => {
+  const handleNext = (e) => {
+    e.preventDefault();
     if (onHandleNext) {
       onHandleNext(); // Use the custom handler if provided
     } else {
@@ -41,7 +42,7 @@ const ActionButtons = (props) => {
         )}
         <div className="d-flex align-items-center justify-content-between ms-auto">
           {props.currentStep < props.totalSteps && (
-            <Button variant={"primary"} onClick={handleNext}>
+            <Button type="submit" variant={"primary"} onClick={handleNext}>
               Next <Icon className={"icon-right"} />
             </Button>
           )}
@@ -64,6 +65,7 @@ const Four = (props) => {
 
     return (
       <Card>
+      <form>
         <div>
           <Label>Course Name</Label>
           <Input type={"text"} onChange={handleChange} inputName="courseName" />
@@ -105,6 +107,7 @@ const Four = (props) => {
           </Dropzone>
         </div>
         <ActionButtons {...props} onHandleNext={handleNext}/>
+        </form>
       </Card>
     );
   };
