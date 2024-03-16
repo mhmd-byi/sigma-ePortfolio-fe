@@ -21,12 +21,7 @@ import Five from "./finalStep";
 const ResumeForm = () => {
   const [user, setUser] = useState({});
   const [activeStep, setActiveStep] = useState(0);
-  const { resumeDetails, handleChange, handleFileChange, removeFile } =
-    useResumeForm();
-
-  const assignStepWizard = (instance) => {
-    //   setStepWizard(instance);
-  };
+  const { resumeDetails, handleChange, handleFileChange, removeFile } = useResumeForm();
 
   const assignUser = (val) => {
     console.log("parent receive user callback");
@@ -46,6 +41,8 @@ const ResumeForm = () => {
   const handleComplete = () => {
     alert("You r done. TQ");
   };
+
+  const { handleSubmit } = useResumeForm();
 
   return (
     <ProtectedRoute>
@@ -73,44 +70,45 @@ const ResumeForm = () => {
                   Skip & Save
                 </Button>
               </div>
-              <StepWizard
-                instance={assignStepWizard}
-                onStepChange={handleStepChange}
-                className="mt-3"
-              >
-                <One
-                  userCallback={assignUser}
-                  resumeDetails={resumeDetails}
-                  handleChange={handleChange}
-                />
-                <Two
-                  userCallback={assignUser}
-                  resumeDetails={resumeDetails}
-                  handleChange={handleChange}
-                  handleFileChange={handleFileChange}
-                  removeFile={removeFile}
-                />
-                <Three
-                  userCallback={assignUser}
-                  resumeDetails={resumeDetails}
-                  handleChange={handleChange}
-                  handleFileChange={handleFileChange}
-                  removeFile={removeFile}
-                />
-                <Four
-                  userCallback={assignUser}
-                  resumeDetails={resumeDetails}
-                  handleChange={handleChange}
-                  handleFileChange={handleFileChange}
-                  removeFile={removeFile}
-                />
-                <Five
-                  user={user}
-                  completeCallback={handleComplete}
-                  resumeDetails={resumeDetails}
-                  handleChange={handleChange}
-                />
-              </StepWizard>
+              <form onSubmit={() => handleSubmit(resumeDetails)}>
+                <StepWizard
+                  onStepChange={handleStepChange}
+                  className="mt-3"
+                >
+                  <One
+                    userCallback={assignUser}
+                    resumeDetails={resumeDetails}
+                    handleChange={handleChange}
+                  />
+                  <Two
+                    userCallback={assignUser}
+                    resumeDetails={resumeDetails}
+                    handleChange={handleChange}
+                    handleFileChange={handleFileChange}
+                    removeFile={removeFile}
+                  />
+                  <Three
+                    userCallback={assignUser}
+                    resumeDetails={resumeDetails}
+                    handleChange={handleChange}
+                    handleFileChange={handleFileChange}
+                    removeFile={removeFile}
+                  />
+                  <Four
+                    userCallback={assignUser}
+                    resumeDetails={resumeDetails}
+                    handleChange={handleChange}
+                    handleFileChange={handleFileChange}
+                    removeFile={removeFile}
+                  />
+                  <Five
+                    user={user}
+                    completeCallback={handleComplete}
+                    resumeDetails={resumeDetails}
+                    handleChange={handleChange}
+                  />
+                </StepWizard>
+              </form>
             </div>
           </div>
         </div>

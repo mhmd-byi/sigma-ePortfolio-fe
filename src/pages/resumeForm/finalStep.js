@@ -25,12 +25,10 @@ const ActionButtons = (props) => {
     }
   };
 
-  const { handleSubmit } = useResumeForm();
 
   const handleFinish = (e) => {
     e.preventDefault();
     props.lastStep();
-    handleSubmit(resumeDetails);
   };
   
     return (
@@ -47,7 +45,7 @@ const ActionButtons = (props) => {
             </Button>
           )}
           {props.currentStep === props.totalSteps && (
-            <Button type='submit' variant={"primarySolid"} onClick={handleFinish}>
+            <Button type='submit' variant={"primarySolid"}>
               Finish{" "}
             </Button>
           )}
@@ -58,12 +56,14 @@ const ActionButtons = (props) => {
 
 const Five = (props) => {
     const { resumeDetails, handleChange } = props;
-    const handleFinish = () => {
+    const { handleSubmit } = useResumeForm();
+    const handleFinish = (e) => {
+      e.preventDefault();
       console.log("Current Resume Details:", resumeDetails);
+      handleSubmit(resumeDetails);
     };
     return (
       <Card>
-      <form>
         <div>
           <Label>Company’s Name</Label>
           <Input type={"text"} onChange={handleChange} inputName="companyName" />
@@ -94,8 +94,7 @@ const Five = (props) => {
           <Label>Detail</Label>
           <Input type={"textarea"} onChange={handleChange} inputName="details" />
         </div>
-        <ActionButtons {...props} handleSubmit={handleFinish}/>
-        </form>
+        <ActionButtons {...props} />
       </Card>
     );
   };
