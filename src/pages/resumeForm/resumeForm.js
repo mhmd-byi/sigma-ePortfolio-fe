@@ -16,7 +16,7 @@ import One from "./step1";
 import Two from "./step2";
 import Three from "./step3";
 import Four from "./step4";
-import Five from "./finalStep";
+import Five from "./step5";
 
 const ResumeForm = () => {
   const [user, setUser] = useState({});

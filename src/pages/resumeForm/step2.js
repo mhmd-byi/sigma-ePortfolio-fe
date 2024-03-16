@@ -66,114 +66,112 @@ const Two = (props) => {
 
   return (
     <Card>
-      <form>
-        <div>
-          <Label>Banner Photo/ Logo</Label>
-          <Dropzone
-            onChange={(files) => handleFileChange(files, "bannerImage")}
-            value={resumeDetails.bannerImage}
-            name="bannerImage"
-          >
-            {resumeDetails?.bannerImage?.map((file) => (
-              <FileMosaic
-                key={file.id}
-                {...file}
-                onDelete={removeFile}
-                info
-                preview
-              />
-            ))}
-          </Dropzone>
-        </div>
-        <div className="mt-3">
-          <Label>Profile Picture</Label>
-          <Dropzone
-            onChange={(files) => handleFileChange(files, "profilePhoto")}
-            value={resumeDetails.profilePhoto}
-            name="profilePhoto"
-          >
-            {resumeDetails?.profilePhoto?.map((file) => (
-              <FileMosaic
-                key={file.id}
-                {...file}
-                onDelete={removeFile}
-                info
-                preview
-              />
-            ))}
-          </Dropzone>
-          <Text variant={"md"} color={"secondary"}>
-            Use 400X400 size for better results
-          </Text>
-        </div>
-        <div className="mt-3">
-          <Label>Select Theme Colour</Label>
-          <div className={Styles.themeSelect}>
-            <input
-              type="radio"
-              name="theme"
-              id="red"
-              value="red"
-              onChange={handleChange}
+      <div>
+        <Label>Banner Photo/ Logo</Label>
+        <Dropzone
+          onChange={(files) => handleFileChange(files, "bannerImage")}
+          value={resumeDetails.bannerImage}
+          name="bannerImage"
+        >
+          {resumeDetails?.bannerImage?.map((file) => (
+            <FileMosaic
+              key={file.id}
+              {...file}
+              onDelete={removeFile}
+              info
+              preview
             />
-            <label htmlFor="red" className={Styles.red}>
-              Red
-            </label>
-
-            <input
-              type="radio"
-              name="theme"
-              id="green"
-              value="green"
-              onChange={handleChange}
+          ))}
+        </Dropzone>
+      </div>
+      <div className="mt-3">
+        <Label>Profile Picture</Label>
+        <Dropzone
+          onChange={(files) => handleFileChange(files, "profilePhoto")}
+          value={resumeDetails.profilePhoto}
+          name="profilePhoto"
+        >
+          {resumeDetails?.profilePhoto?.map((file) => (
+            <FileMosaic
+              key={file.id}
+              {...file}
+              onDelete={removeFile}
+              info
+              preview
             />
-            <label htmlFor="green" className={Styles.green}>
-              Green
-            </label>
-
-            <input
-              type="radio"
-              name="theme"
-              id="blue"
-              value="blue"
-              onChange={handleChange}
-            />
-            <label htmlFor="blue" className={Styles.blue}>
-              Blue
-            </label>
-          </div>
-        </div>
-        <div className="mt-3">
-          <Label>Custom Domain</Label>
-          <Input
-            type={"text"}
-            placeholder={"Enter Domain"}
+          ))}
+        </Dropzone>
+        <Text variant={"md"} color={"secondary"}>
+          Use 400X400 size for better results
+        </Text>
+      </div>
+      <div className="mt-3">
+        <Label>Select Theme Colour</Label>
+        <div className={Styles.themeSelect}>
+          <input
+            type="radio"
+            name="theme"
+            id="red"
+            value="red"
             onChange={handleChange}
-            inputName={"customDomain"}
           />
-          <Text variant={"md"} color={"secondary"}>
-            Your Card Link will be:{" "}
-            <Text strong={"semiBold"} color={"dark"}>
-              https://
-            </Text>
+          <label htmlFor="red" className={Styles.red}>
+            Red
+          </label>
+
+          <input
+            type="radio"
+            name="theme"
+            id="green"
+            value="green"
+            onChange={handleChange}
+          />
+          <label htmlFor="green" className={Styles.green}>
+            Green
+          </label>
+
+          <input
+            type="radio"
+            name="theme"
+            id="blue"
+            value="blue"
+            onChange={handleChange}
+          />
+          <label htmlFor="blue" className={Styles.blue}>
+            Blue
+          </label>
+        </div>
+      </div>
+      <div className="mt-3">
+        <Label>Custom Domain</Label>
+        <Input
+          type={"text"}
+          placeholder={"Enter Domain"}
+          onChange={handleChange}
+          inputName={"customDomain"}
+        />
+        <Text variant={"md"} color={"secondary"}>
+          Your Card Link will be:{" "}
+          <Text strong={"semiBold"} color={"dark"}>
+            https://
           </Text>
+        </Text>
+      </div>
+      <div className="mt-3 border-top pt-3">
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckChecked"
+            onChange={handleChange}
+          />
+          <label class="form-check-label" for="flexSwitchCheckChecked">
+            Hide Branding
+          </label>
         </div>
-        <div className="mt-3 border-top pt-3">
-          <div class="form-check form-switch">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheckChecked"
-              onChange={handleChange}
-            />
-            <label class="form-check-label" for="flexSwitchCheckChecked">
-              Hide Branding
-            </label>
-          </div>
-        </div>
-        <ActionButtons {...props} onHandleNext={handleNext} />
-      </form>
+      </div>
+      <ActionButtons {...props} onHandleNext={handleNext} />
     </Card>
   );
 };

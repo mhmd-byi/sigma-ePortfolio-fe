@@ -73,95 +73,93 @@ const Three = (props) => {
 
   return (
     <Card>
-      <form>
-        <div>
-          <Label>Intro Video</Label>
-          <Dropzone
-            onChange={(files) => handleFileChange(files, "introVideo")}
-            value={resumeDetails.introVideo}
-            name="introVideo"
-          >
-            {resumeDetails?.introVideo?.map((file) => (
-              <FileMosaic
-                key={file.id}
-                {...file}
-                onDelete={removeFile}
-                info
-                preview
-              />
-            ))}
-          </Dropzone>
-        </div>
-        <div className="mt-3">
-          <Label>Summary/ About me</Label>
-          <Input
-            type={"textarea"}
-            rows={4}
-            onChange={handleChange}
-            inputName={"aboutMe"}
-          />
-        </div>
-        <div className="mt-3">
-          <Label>Projects Name</Label>
-          <Input
-            type={"text"}
-            onChange={handleChange}
-            inputName={"projectsName"}
-          />
-        </div>
-        <div className="mt-3">
-          <Label>Project Description</Label>
-          <Input
-            type={"textarea"}
-            rows={4}
-            onChange={handleChange}
-            inputName={"projectDescription"}
-          />
-        </div>
-        <div className="mt-3">
-          <Label>Certificates/ Achievements</Label>
-          <Dropzone
-            onChange={(files) => handleFileChange(files, "achievements")}
-            value={resumeDetails.achievements}
-            name="achievements"
-          >
-            {resumeDetails?.achievements?.map((file) => (
-              <FileMosaic
-                key={file.id}
-                {...file}
-                onDelete={removeFile}
-                info
-                preview
-              />
-            ))}
-          </Dropzone>
-        </div>
-        <div className="mt-3">
-          <Label>Hard Skills</Label>
-          <MultiSelect
-            onChange={handleChange}
-            options={options}
-            className="w-100 changeBorder"
-            name="skills"
-            value={resumeDetails.skills}
-          />
-        </div>
-        <div className="mt-3">
-          <Label>Soft Skills</Label>
-          <MultiSelect
-            onChange={handleChange}
-            options={options}
-            className="w-100 changeBorder"
-            name="languages"
-            value={resumeDetails.languages}
-          />
-        </div>
-        {/*<div className="mt-3">
+      <div>
+        <Label>Intro Video</Label>
+        <Dropzone
+          onChange={(files) => handleFileChange(files, "introVideo")}
+          value={resumeDetails.introVideo}
+          name="introVideo"
+        >
+          {resumeDetails?.introVideo?.map((file) => (
+            <FileMosaic
+              key={file.id}
+              {...file}
+              onDelete={removeFile}
+              info
+              preview
+            />
+          ))}
+        </Dropzone>
+      </div>
+      <div className="mt-3">
+        <Label>Summary/ About me</Label>
+        <Input
+          type={"textarea"}
+          rows={4}
+          onChange={handleChange}
+          inputName={"aboutMe"}
+        />
+      </div>
+      <div className="mt-3">
+        <Label>Projects Name</Label>
+        <Input
+          type={"text"}
+          onChange={handleChange}
+          inputName={"projectsName"}
+        />
+      </div>
+      <div className="mt-3">
+        <Label>Project Description</Label>
+        <Input
+          type={"textarea"}
+          rows={4}
+          onChange={handleChange}
+          inputName={"projectDescription"}
+        />
+      </div>
+      <div className="mt-3">
+        <Label>Certificates/ Achievements</Label>
+        <Dropzone
+          onChange={(files) => handleFileChange(files, "achievements")}
+          value={resumeDetails.achievements}
+          name="achievements"
+        >
+          {resumeDetails?.achievements?.map((file) => (
+            <FileMosaic
+              key={file.id}
+              {...file}
+              onDelete={removeFile}
+              info
+              preview
+            />
+          ))}
+        </Dropzone>
+      </div>
+      <div className="mt-3">
+        <Label>Hard Skills</Label>
+        <MultiSelect
+          onChange={handleChange}
+          options={options}
+          className="w-100 changeBorder"
+          name="skills"
+          value={resumeDetails.skills}
+        />
+      </div>
+      <div className="mt-3">
+        <Label>Soft Skills</Label>
+        <MultiSelect
+          onChange={handleChange}
+          options={options}
+          className="w-100 changeBorder"
+          name="languages"
+          value={resumeDetails.languages}
+        />
+      </div>
+      {/*<div className="mt-3">
           <Label>Interests</Label>
           <Input type={"text"} onChange={handleChange} inputName="interests" />
             </div>*/}
-        <ActionButtons {...props} onHandleNext={handleNext} />
-      </form>
+      <ActionButtons {...props} onHandleNext={handleNext} />
     </Card>
   );
 };
