@@ -10,6 +10,7 @@ import StepWizard from "react-step-wizard";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import { useResumeForm } from "./useResumeForm";
 import { ProtectedRoute } from "../../components/security/protectedRoute";
+import { StepOne } from "./components/StepOne";
 
 // Steps Components
 import One from "./step1";
