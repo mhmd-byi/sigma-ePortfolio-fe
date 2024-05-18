@@ -14,6 +14,8 @@ const Portfolio = () => {
   const userId = sessionStorage.getItem('userId');
   const token = sessionStorage.getItem('token');
   const { portfolioDetails } = useGetPortfolioDetails(token, userId);
+  const portfolioId = portfolioDetails?.id;
+  const shareResume = () => navigate(`/portfolio/${portfolioId}`);
 
   return (
     <ProtectedRoute>
@@ -42,7 +44,7 @@ const Portfolio = () => {
                   <Button onClick={viewPortfolio}>
                     <Icon className={"icon-view"} /> View
                   </Button>
-                  <Button>
+                  <Button onClick={shareResume}>
                     <Icon className={"icon-share"} /> Share
                   </Button>
                 </div>

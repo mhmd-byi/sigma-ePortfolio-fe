@@ -13,7 +13,6 @@ const ViewResumeWithId = () => {
   const [theme, setTheme] = useState("");
 
   const { resumeDetails } = useViewResumeWithId();
-  console.log("line 30", resumeDetails);
   useEffect(() => {
     setTheme(resumeDetails?.theme);
   }, [resumeDetails]);
