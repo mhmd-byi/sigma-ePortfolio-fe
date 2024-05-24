@@ -25,7 +25,7 @@ const Header = ({pageHeading}) => {
                         <Image src='/images/avatar.png' />
                     </div>
                     <ul className={`${Styles.dropdown} dropdown-menu mt-2`}>
-                        <li>Account settings</li>
+                        <li onClick={()=>navigate('/account-settings')}>Account settings</li>
                         <li onClick={()=>navigate('/subscribe')}>Subscription</li>
                         <li>Support</li>
                         <li>Rate Us</li>

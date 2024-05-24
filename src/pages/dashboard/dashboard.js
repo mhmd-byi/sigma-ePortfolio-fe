@@ -13,11 +13,20 @@ import { useNavigate } from "react-router-dom";
 import { ProtectedRoute } from "../../components/security/protectedRoute";
 import { useDashboard } from "./useDashboard";
 
+import { useGetPortfolioDetails } from "../portfolio/useGetPortfolioDetails";
+import { useGetResumeDetails } from "../resume/useGetResumeDetails";
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const ToResume = () => navigate("/resume");
   const ToPortfolio = () => navigate("/portfolio");
   const { userDetails } = useDashboard();
+  const userId = sessionStorage.getItem("userId");
+  const token = sessionStorage.getItem("token");
+  const { portfolioDetails } = useGetPortfolioDetails(token, userId);
+  const portfolioId = portfolioDetails?.id;
+  const { resumeDetails } = useGetResumeDetails(token, userId);
+  const resumeId = resumeDetails?.id;
 
   return (
     <ProtectedRoute>
@@ -26,14 +35,18 @@ const Dashboard = () => {
         <div className={Styles.main}>
           <Header pageHeading={"Dashboard"} />
           <div className={Styles.cardGrid}>
-            <Card className={Styles.card} onClick={ToResume}>
-              <Icon className={"icon-plus"} />
-              <Text>Create New Resume</Text>
-            </Card>
-            <Card className={Styles.card} onClick={ToPortfolio}>
-              <Icon className={"icon-plus"} />
-              <Text>Create New Portfolio</Text>
-            </Card>
+            {!resumeId && (
+              <Card className={Styles.card} onClick={ToResume}>
+                <Icon className={"icon-plus"} />
+                <Text>Create New Resume</Text>
+              </Card>
+            )}
+            {!portfolioId && (
+              <Card className={Styles.card} onClick={ToPortfolio}>
+                <Icon className={"icon-plus"} />
+                <Text>Create New Portfolio</Text>
+              </Card>
+            )}
             <Card className={Styles.detailCard}>
               <div className={Styles.row}>
                 <div className={Styles.leftCol}>

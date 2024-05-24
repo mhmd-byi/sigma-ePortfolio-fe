@@ -8,6 +8,7 @@ import viewPortfolio from './pages/viewPortfolio'
 import viewResume from './pages/viewResume'
 import UploadImageToS3WithReactS3 from './pages/uploadImage/upload'
 import { FileDragZone } from './components'
+import userDetails from './pages/userDetails'
 
 
 export const routes = [
@@ -94,6 +95,11 @@ export const routes = [
   {
     path: '/portfolio/:portfolioId',
     component: ViewPortfolioWithId,
+    exact: true,
+  },
+  {
+    path: '/account-settings',
+    component: userDetails,
     exact: true,
   }
 ]
